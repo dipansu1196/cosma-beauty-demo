@@ -9,7 +9,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client/build')));
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 // Database setup
 const db = new sqlite3.Database(':memory:');
@@ -242,7 +245,11 @@ app.get('/packages/popular', (req, res) => {
 
 // Serve React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  if (process.env.NODE_ENV === 'production') {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  } else {
+    res.json({ message: 'Cosma Beauty API Server', endpoints: ['/search/concern=text', '/enquiries', '/admin/enquiries'] });
+  }
 });
 
 app.listen(PORT, () => {

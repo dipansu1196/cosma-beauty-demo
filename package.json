@@ -1,0 +1,22 @@
+{
+  "name": "cosma-beauty-demo",
+  "version": "1.0.0",
+  "description": "Cosma Beauty core flow demo - search concerns, view treatments and packages, submit enquiries",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "vercel-build": "cd client && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
